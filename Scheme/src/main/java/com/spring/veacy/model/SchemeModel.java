@@ -10,4 +10,5 @@ public class SchemeModel {
 	private String schemeName;
 	private String schemeDescription;
 	private Long auditingId;
+	private Boolean isActive = true;
 }

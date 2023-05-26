@@ -10,9 +10,9 @@ import com.spring.veacy.entity.Scheme;
 
 public interface SchemeRepo extends JpaRepository<Scheme, Long>{
 
-	Optional<Scheme> findBySchemeName(String schemeName);
+//	@Query(nativeQuery = true, value="SELECT * FROM scheme_table WHERE scheme_name=? && is_deleted=false")
+	Optional<Scheme> findBySchemeNameAndIsDeletedFalse(String schemeName);
 	
-//	@Query("UPDATE Scheme SET isDeleted = true WHERE schemeName=?")
-//	@SQLDelete(sql = "UPDATE scheme_table SET is_deleted = true WHERE scheme_name = ?")
-	String deleteBySchemeName(String schemeName);
+	
+	
 }

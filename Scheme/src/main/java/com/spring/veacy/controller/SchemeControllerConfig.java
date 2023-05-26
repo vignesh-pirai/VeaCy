@@ -3,11 +3,13 @@ package com.spring.veacy.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.spring.veacy.entity.Scheme;
 import com.spring.veacy.model.SchemeModel;
+import com.spring.veacy.response.ApiResponseMessage;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,46 +29,40 @@ public interface SchemeControllerConfig {
 	public List<Scheme> getAll();
 	
 	@Operation(summary = "Show particular Scheme Details", 
-			   description = "Display Scheme Details by its Id")
-	@ApiResponse(responseCode = "200", content = {
-             @Content(schema = @Schema(), mediaType = "application/json") })
-	public String getById(@PathVariable Long id);
-	
-	@Operation(summary = "Show particular Scheme Details", 
 			   description = "Display Scheme Details by its Name")
 	@ApiResponse(responseCode = "200", content = {
              @Content(schema = @Schema(), mediaType = "application/json") })
-	public String getByName(@PathVariable String name);
+	public ResponseEntity<Scheme> getByName(@PathVariable String name);
 	
 	@Operation(summary = "Save Scheme Details", 
 			   description = "Create and store the Scheme Details")
 	@ApiResponse(responseCode = "200", content = {
              @Content(schema = @Schema(), mediaType = "application/json") })
-	public String save(@RequestBody SchemeModel scheme);
+	public ResponseEntity<ApiResponseMessage> save(@RequestBody SchemeModel scheme);
 	
-	@Operation(summary = "Update Scheme Details", 
-			   description = "Update the Scheme Details by its Name")
-	@ApiResponse(responseCode = "200", content = {
-             @Content(schema = @Schema(), mediaType = "application/json") })
-	public String update(@RequestBody SchemeModel scheme,@PathVariable String name);
+//	@Operation(summary = "Update Scheme Details", 
+//			   description = "Update the Scheme Details by its Name")
+//	@ApiResponse(responseCode = "200", content = {
+//             @Content(schema = @Schema(), mediaType = "application/json") })
+//	public ResponseEntity<ApiResponse> update(@RequestBody SchemeModel scheme,@PathVariable String name);
 	
 	@Operation(summary = "Update Scheme Details", 
 			   description = "Update the specific Scheme Details by its Name")
 	@ApiResponse(responseCode = "200", content = {
              @Content(schema = @Schema(), mediaType = "application/json") })
-	public String updated(@RequestBody Map<String, Object> updates,@PathVariable String name);
+	public ResponseEntity<ApiResponseMessage> updated(@RequestBody Map<String, Object> updates,@PathVariable String name);
 	
 	@Operation(summary = "Delete Scheme Details", 
 			   description = "Delete the Scheme Details by its Id")
 	@ApiResponse(responseCode = "200", content = {
              @Content(schema = @Schema(), mediaType = "application/json") })
-	public String deleteById(@PathVariable Long id);
+	public ResponseEntity<ApiResponseMessage> deleteById(@PathVariable Long id);
 	
 	@Operation(summary = "Delete the Scheme Details", 
 			   description = "Delete the Scheme Details by its name")
 	@ApiResponse(responseCode = "200", content = {
        @Content(schema = @Schema(), mediaType = "application/json") })
-	public String deleteByName(@PathVariable String name);
+	public ResponseEntity<ApiResponseMessage> deleteByName(@PathVariable String name);
 	
 //	@Operation(summary = "Delete the Scheme Details", 
 //			   description = "Delete all the Scheme Details")

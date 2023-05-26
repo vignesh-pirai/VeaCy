@@ -6,8 +6,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.veacy.entity.AuditingLogger;
 import com.spring.veacy.entity.Scheme;
 import com.spring.veacy.entity.User;
@@ -15,6 +18,8 @@ import com.spring.veacy.entity.UserSchemeMapping;
 import com.spring.veacy.model.SchemeModel;
 import com.spring.veacy.model.UserSchemeMappingModel;
 import com.spring.veacy.repos.UserSchemeMappingRepo;
+import com.spring.veacy.response.ApiResponseMessage;
+import com.spring.veacy.response.ErrorConstants;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +29,9 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 
 	@Autowired
 	UserSchemeMappingRepo repo;
+	
+	@Autowired
+	ErrorConstants message;
 	
 	@Override
 	public List<UserSchemeMapping> getAll() {
@@ -40,10 +48,25 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 	}
 
 	@Override
-	public String save(UserSchemeMappingModel userSchemeMappingModel) {
+	public List<UserSchemeMapping> getBySchemeId(Long id) {
+		
+		return repo.findByScheme(id);
+	}
+
+	@Override
+	public List<UserSchemeMapping> getByUserId(Long id) {
+		return repo.findByUser(id);
+	}
+	
+	@Override
+	public ResponseEntity<ApiResponseMessage> save(UserSchemeMappingModel userSchemeMappingModel) {
 		log.info("Entered into the Create method");
+		ApiResponseMessage response = new ApiResponseMessage();
 		try {
 			log.debug("Storing User-Scheme Mapping details");
+			Optional<UserSchemeMapping> list = repo.findBySchemeAndUser(userSchemeMappingModel.getUserId(), userSchemeMappingModel.getSchemeId());
+			if(list.isEmpty())
+			{
 			UserSchemeMapping mapping = new UserSchemeMapping();
 			User user = new User();
 			user.setId(userSchemeMappingModel.getUserId());
@@ -57,103 +80,156 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 			mapping.setAuditingId(logger);
 			repo.save(mapping);
 			log.debug("Stored User-Scheme Mapping details");
-			return "Created Successfully";
+			response.setMessage(message.getSuccess());
+			response.setStatus(Boolean.TRUE);
+			response.setStatusCode(message.getCode200());
+//			return "Created Successfully";
+			return new ResponseEntity<>(response, HttpStatus.OK);
+			}
+			else
+			{
+				response.setMessage(message.getUserSchemeExists());
+				response.setStatus(Boolean.FALSE);
+				response.setStatusCode(message.getCode500());
+//				return "Already Exists";
+				response.setMessage(message.getSchemeExists());
+				response.setStatus(Boolean.FALSE);
+				response.setStatusCode(message.getCode500());
+				return new ResponseEntity<>(response, HttpStatus.NOT_ACCEPTABLE);
+			}
 		}
 		catch(Exception e)
 		{
 			log.warn("The User-Scheme Mapping is not created");
-			return "Error --> "+e.getMessage();
+			response.setMessage(message.getSchemeExists());
+			response.setStatus(Boolean.FALSE);
+			response.setStatusCode(message.getCode500());
+//			return "Error --> "+e.getMessage();
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
 	}
 
-	@Override
-	public String update(UserSchemeMappingModel userSchemeMappingModel, Long id) {
-		log.info("Entered into the Update method");
-		Optional<UserSchemeMapping> optional = repo.findById(id);
-		if(optional.isPresent())
-		{
-			log.debug("Updating User-Scheme Mapping details");
-			UserSchemeMapping mapping = optional.get();
-			User user = new User();
-			user.setId(userSchemeMappingModel.getUserId());
-			Scheme scheme = new Scheme();
-			scheme.setId(userSchemeMappingModel.getSchemeId());
-			mapping.setUser(user);
-			mapping.setScheme(scheme);
-			mapping.setCommitmentAmount(userSchemeMappingModel.getCommitmentAmount());
-//			mapping.setIsDeleted(userSchemeMappingModel.getIsDeleted());			
-			repo.saveAndFlush(mapping);
-			log.debug("Updated User-Scheme Mapping details");
-			return "The id= "+id+" is updated successfully";
-		}
-		else
-		{
-			log.warn("The User-Scheme Mapping is not updated");
-			return "The id= "+id+" is not found";
-		}
-	}
+//	@Override
+//	public String update(UserSchemeMappingModel userSchemeMappingModel, Long id) {
+//		log.info("Entered into the Update method");
+//		Optional<UserSchemeMapping> optional = repo.findById(id);
+//		if(optional.isPresent())
+//		{
+//			log.debug("Updating User-Scheme Mapping details");
+//			UserSchemeMapping mapping = optional.get();
+//			User user = new User();
+//			user.setId(userSchemeMappingModel.getUserId());
+//			Scheme scheme = new Scheme();
+//			scheme.setId(userSchemeMappingModel.getSchemeId());
+//			mapping.setUser(user);
+//			mapping.setScheme(scheme);
+//			mapping.setCommitmentAmount(userSchemeMappingModel.getCommitmentAmount());
+//			repo.saveAndFlush(mapping);
+//			log.debug("Updated User-Scheme Mapping details");
+//			return "The id= "+id+" is updated successfully";
+//		}
+//		else
+//		{
+//			log.warn("The User-Scheme Mapping is not updated");
+//			return "The id= "+id+" is not found";
+//		}
+//	}
 
 	@Override
-	public String updated(Map<String, Object> updates, Long id) {
+//	public String updated(Map<String, Object> updates, Long uid, Long sid) {
+	public ResponseEntity<ApiResponseMessage> updated(Map<String, Object> updates, Long id) {
 		log.info("Entered into the Update method");
+		ApiResponseMessage response = new ApiResponseMessage();
 		Optional<UserSchemeMapping> optional = repo.findById(id);
-		if(optional.isPresent())
-		{
-			UserSchemeMapping userSchemeMapping = optional.get();
-			log.debug("Updating User-Scheme Mapping details");
-			updates.forEach(
-					(field,value)->{
-						switch(field)
-						{
-							case "userId": 
-								User user = new User();
-								user.setId(Long.valueOf((int) value));
-								userSchemeMapping.setUser(user);
-								break;
-							case "schemeId":
-								Scheme scheme = new Scheme();
-								scheme.setId(Long.valueOf((int) value));
-								userSchemeMapping.setScheme(scheme);
-								break;
-							case "commitmentAmount":
-//								userSchemeMapping.setCommitmentAmount((Double) value);
-								if (value instanceof Integer) {
-			                        userSchemeMapping.setCommitmentAmount(((Integer) value).doubleValue());
-			                    } else {
-			                        userSchemeMapping.setCommitmentAmount((Double) value);
-			                    }
-								break;
-							default: throw new IllegalArgumentException("Invalid field: "+field); 
+//		final ObjectMapper mapper = new ObjectMapper(); // jackson's objectmapper
+//		final UserSchemeMappingModel pojo = mapper.convertValue(updates, UserSchemeMappingModel.class);
+//		Optional<UserSchemeMapping> optional = repo.findBySchemeAndUser(pojo.getUserId(),pojo.getSchemeId());
+		try{
+			if(optional.isPresent())
+//		if(optional.isEmpty())
+			{
+				UserSchemeMapping userSchemeMapping = optional.get();
+				log.debug("Updating User-Scheme Mapping details");
+				updates.forEach(
+						(field,value)->{
+							switch(field)
+							{
+								case "userId": 
+									User user = new User();
+									user.setId(Long.valueOf((int) value));
+									userSchemeMapping.setUser(user);
+									break;
+								case "schemeId":
+									Scheme scheme = new Scheme();
+									scheme.setId(Long.valueOf((int) value));
+									userSchemeMapping.setScheme(scheme);
+									break;
+								case "commitmentAmount":
+	//								userSchemeMapping.setCommitmentAmount((Double) value);
+									if (value instanceof Integer) {
+				                        userSchemeMapping.setCommitmentAmount(((Integer) value).doubleValue());
+				                    } else {
+				                        userSchemeMapping.setCommitmentAmount((Double) value);
+				                    }
+									break;
+								default: throw new IllegalArgumentException("Invalid field: "+field); 
+							}
 						}
-					}
-			);
-			repo.save(userSchemeMapping);
-			log.debug("Updated User-Scheme Mapping details: {}",updates);
-			return "Updated Successfully";
+				);
+				repo.save(userSchemeMapping);
+				log.debug("Updated User-Scheme Mapping details: {}",updates);
+				response.setMessage(message.getSuccess());
+				response.setStatus(Boolean.TRUE);
+				response.setStatusCode(message.getCode200());
+//				return "Updated Successfully";
+				return new ResponseEntity<>(response, HttpStatus.OK);
+			}
+			else
+			{
+				log.warn("The User-Scheme Mapping is not updated");
+	//			return "The User id = "+uid+", Scheme id = "+sid+"is not found.";
+//				return "The id = "+id+"is not found.";
+				response.setMessage(message.getSchemeNotFound());
+				response.setStatus(Boolean.FALSE);
+				response.setStatusCode(message.getCode500());
+				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+			}
 		}
-		else
-		{
-			log.warn("The User-Scheme Mapping is not updated");
-			return "The id = "+id+"is not found.";
+		catch (Exception e) {
+			response.setMessage(message.getSchemeExists());
+			response.setStatus(Boolean.FALSE);
+			response.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@Override
-	public String deleteById(Long id) {
+	public ResponseEntity<ApiResponseMessage> deleteById(Long id) {
 		log.info("Entered into the Delete by Id method");
+		ApiResponseMessage response = new ApiResponseMessage();
 		try {
 			log.debug("Deleting User-Scheme Mapping details by id: {}",id);
 			repo.deleteById(id);
 			log.debug("Deleted User-Scheme Mapping details by id: {}",id);
-			return "Deleted Successfully";
+			response.setMessage(message.getSuccess());
+			response.setStatus(Boolean.TRUE);
+			response.setStatusCode(message.getCode200());
+//			return "Deleted Successfully";
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 		catch (Exception e) {
 			log.warn("The User-Scheme Mapping is not deleted by id: {}",id);
-			return "Error Message --> "+e.getMessage();
+			response.setMessage(message.getSchemeExists());
+			response.setStatus(Boolean.FALSE);
+			response.setStatusCode(message.getCode500());
+//			return "Error Message --> "+e.getMessage();
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	
 
 //	@Override
 //	public String deleteAll() {
@@ -167,10 +243,6 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 //		}
 //	}
 
-//	@Override
-//	public UserSchemeMapping getBySchemeName(Scheme scheme) {
-//		
-//		return null;
-//	}
+
 
 }

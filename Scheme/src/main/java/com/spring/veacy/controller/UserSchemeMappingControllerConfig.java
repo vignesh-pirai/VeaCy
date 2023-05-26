@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -38,11 +39,11 @@ public interface UserSchemeMappingControllerConfig {
           @Content(schema = @Schema(), mediaType = "application/json") })
 	public String save(@RequestBody UserSchemeMappingModel userSchemeMappingModel);
 	
-	@Operation(summary = "Update User-Scheme Mapping Details", 
-			   description = "Update the User-Scheme Mapping Details by its Name")
-	@ApiResponse(responseCode = "200", content = {
-          @Content(schema = @Schema(), mediaType = "application/json") })
-	public String update(@RequestBody UserSchemeMappingModel userSchemeMappingModel,@PathVariable Long id);
+//	@Operation(summary = "Update User-Scheme Mapping Details", 
+//			   description = "Update the User-Scheme Mapping Details by its Name")
+//	@ApiResponse(responseCode = "200", content = {
+//          @Content(schema = @Schema(), mediaType = "application/json") })
+//	public String update(@RequestBody UserSchemeMappingModel userSchemeMappingModel,@PathVariable Long id);
 	
 	@Operation(summary = "Update User-Scheme Mapping Details", 
 			   description = "Update the specific User-Scheme Mapping Details by its Id")
