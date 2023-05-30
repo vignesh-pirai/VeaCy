@@ -680,3 +680,276 @@ com.spring.veacy.entity.Scheme@1505b9c5
 30-05-2023 | 16:02:19.932 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
 30-05-2023 | 16:02:19.940 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 0.924 seconds (JVM running for 5634.512)
 30-05-2023 | 16:02:19.943 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 16:11:18.310 | INFO  | 159 | shutdown | o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin | Application shutdown requested.
+30-05-2023 | 16:11:18.312 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 16:11:18.318 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 16:11:18.319 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-17 - Shutdown initiated...
+30-05-2023 | 16:11:18.323 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-17 - Shutdown completed.
+30-05-2023 | 18:10:01.384 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:10:01.386 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:10:01.441 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+30-05-2023 | 18:10:01.442 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+30-05-2023 | 18:10:02.214 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:10:02.271 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 48 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:10:02.851 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:10:02.861 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:10:02.862 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:10:02.923 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:10:02.924 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 1481 ms
+30-05-2023 | 18:10:03.048 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:10:03.084 | INFO  | 44 | logVersion | o.h.Version | HHH000412: Hibernate ORM core version 5.6.15.Final
+30-05-2023 | 18:10:03.249 | INFO  | 56 | <clinit> | o.h.a.c.Version | HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+30-05-2023 | 18:10:03.331 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Starting...
+30-05-2023 | 18:10:03.634 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Start completed.
+30-05-2023 | 18:10:03.658 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:10:04.336 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:10:04.346 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:10:04.846 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:10:05.627 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:10:05.666 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:10:05.677 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 4.678 seconds (JVM running for 5.547)
+30-05-2023 | 18:10:12.351 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+30-05-2023 | 18:10:12.352 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+30-05-2023 | 18:10:12.355 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 2 ms
+30-05-2023 | 18:10:12.388 | INFO  | 63 | getAll | c.s.v.c.UserSchemeMappingController | Entered into the GetAll method in Controller
+30-05-2023 | 18:10:12.388 | INFO  | 64 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:10:12.389 | DEBUG | 65 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Fetching all the User-Scheme Mapping details
+30-05-2023 | 18:10:12.528 | DEBUG | 78 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.UserSchemeMapping@65dff8b7, com.spring.veacy.entity.UserSchemeMapping@dbad553]
+30-05-2023 | 18:10:24.105 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:10:24.120 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:10:24.122 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+30-05-2023 | 18:10:24.133 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:10:24.137 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown initiated...
+30-05-2023 | 18:10:24.147 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown completed.
+30-05-2023 | 18:10:24.240 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:10:24.240 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:10:24.434 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:10:24.447 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 12 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:10:24.558 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:10:24.559 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:10:24.559 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:10:24.569 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:10:24.570 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 327 ms
+30-05-2023 | 18:10:24.614 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:10:24.619 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-2 - Starting...
+30-05-2023 | 18:10:24.635 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-2 - Start completed.
+30-05-2023 | 18:10:24.635 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:10:24.800 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:10:24.801 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:10:25.013 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:10:25.442 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:10:25.474 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:10:25.481 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 1.277 seconds (JVM running for 25.351)
+30-05-2023 | 18:10:25.484 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:26:51.845 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+30-05-2023 | 18:26:51.845 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+30-05-2023 | 18:26:51.846 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 1 ms
+30-05-2023 | 18:26:51.848 | INFO  | 63 | getAll | c.s.v.c.UserSchemeMappingController | Entered into the GetAll method in Controller
+30-05-2023 | 18:26:51.848 | INFO  | 64 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:26:51.848 | DEBUG | 65 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Fetching all the User-Scheme Mapping details
+30-05-2023 | 18:26:51.867 | DEBUG | 78 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.UserSchemeMapping@20901d2d, com.spring.veacy.entity.UserSchemeMapping@917faf7]
+30-05-2023 | 18:30:00.992 | INFO  | 398 | getOpenApi | o.s.a.AbstractOpenApiResource | Init duration for springdoc-openapi is: 285 ms
+30-05-2023 | 18:30:21.922 | INFO  | 54 | getAll | c.s.v.c.SchemeController | Entered into the GetAll method in Controller
+30-05-2023 | 18:30:21.923 | INFO  | 48 | getAll | c.s.v.s.SchemeServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:30:21.923 | DEBUG | 49 | getAll | c.s.v.s.SchemeServiceImpl | Fetching all the scheme details
+30-05-2023 | 18:30:21.938 | DEBUG | 61 | getAll | c.s.v.s.SchemeServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.Scheme@777e96e9, com.spring.veacy.entity.Scheme@2d627fc5]
+30-05-2023 | 18:34:49.945 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:34:49.953 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:34:49.955 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+30-05-2023 | 18:34:49.976 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:34:49.979 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-2 - Shutdown initiated...
+30-05-2023 | 18:34:49.988 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-2 - Shutdown completed.
+30-05-2023 | 18:34:50.086 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:34:50.087 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:34:50.280 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:34:50.289 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 8 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:34:50.388 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:34:50.389 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:34:50.389 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:34:50.399 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:34:50.399 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 310 ms
+30-05-2023 | 18:34:50.436 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:34:50.444 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-3 - Starting...
+30-05-2023 | 18:34:50.459 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-3 - Start completed.
+30-05-2023 | 18:34:50.460 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:34:50.590 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:34:50.591 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:34:50.803 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:34:51.148 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:34:51.160 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:34:51.167 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 1.113 seconds (JVM running for 1491.038)
+30-05-2023 | 18:34:51.170 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:35:46.740 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:35:46.743 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:35:46.753 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:35:46.755 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-3 - Shutdown initiated...
+30-05-2023 | 18:35:46.762 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-3 - Shutdown completed.
+30-05-2023 | 18:35:46.853 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:35:46.853 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:35:47.024 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:35:47.036 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 11 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:35:47.127 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:35:47.128 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:35:47.129 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:35:47.138 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:35:47.138 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 283 ms
+30-05-2023 | 18:35:47.170 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:35:47.174 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-4 - Starting...
+30-05-2023 | 18:35:47.190 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-4 - Start completed.
+30-05-2023 | 18:35:47.191 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:35:47.316 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:35:47.317 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:35:47.610 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:35:47.922 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:35:47.936 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:35:47.945 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 1.12 seconds (JVM running for 1547.815)
+30-05-2023 | 18:35:47.947 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:35:50.086 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+30-05-2023 | 18:35:50.086 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+30-05-2023 | 18:35:50.088 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 1 ms
+30-05-2023 | 18:35:50.089 | INFO  | 63 | getAll | c.s.v.c.UserSchemeMappingController | Entered into the GetAll method in Controller
+30-05-2023 | 18:35:50.090 | INFO  | 64 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:35:50.090 | DEBUG | 65 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Fetching all the User-Scheme Mapping details
+30-05-2023 | 18:35:50.110 | DEBUG | 78 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.UserSchemeMapping@21e54a3e, com.spring.veacy.entity.UserSchemeMapping@44b02489]
+30-05-2023 | 18:36:33.472 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:36:33.479 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:36:33.481 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+30-05-2023 | 18:36:33.501 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:36:33.505 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-4 - Shutdown initiated...
+30-05-2023 | 18:36:33.527 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-4 - Shutdown completed.
+30-05-2023 | 18:36:33.643 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:36:33.644 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:36:33.816 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:36:33.825 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 8 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:36:33.898 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:36:33.899 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:36:33.899 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:36:33.907 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:36:33.908 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 263 ms
+30-05-2023 | 18:36:33.938 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:36:33.943 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-5 - Starting...
+30-05-2023 | 18:36:33.955 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-5 - Start completed.
+30-05-2023 | 18:36:33.958 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:36:34.076 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:36:34.077 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:36:34.278 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:36:34.803 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:36:34.826 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:36:34.837 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 1.222 seconds (JVM running for 1594.707)
+30-05-2023 | 18:36:34.841 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:36:46.813 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+30-05-2023 | 18:36:46.814 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+30-05-2023 | 18:36:46.815 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 1 ms
+30-05-2023 | 18:36:46.816 | INFO  | 63 | getAll | c.s.v.c.UserSchemeMappingController | Entered into the GetAll method in Controller
+30-05-2023 | 18:36:46.817 | INFO  | 64 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:36:46.817 | DEBUG | 65 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Fetching all the User-Scheme Mapping details
+30-05-2023 | 18:36:46.832 | DEBUG | 78 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.UserSchemeMapping@4a5f1386, com.spring.veacy.entity.UserSchemeMapping@11a3f18a]
+30-05-2023 | 18:37:24.382 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:37:24.385 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:37:24.385 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+30-05-2023 | 18:37:24.393 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:37:24.394 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-5 - Shutdown initiated...
+30-05-2023 | 18:37:24.403 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-5 - Shutdown completed.
+30-05-2023 | 18:37:24.523 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:37:24.523 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:37:24.670 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:37:24.680 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 9 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:37:24.757 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:37:24.757 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:37:24.758 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:37:24.766 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:37:24.766 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 240 ms
+30-05-2023 | 18:37:24.800 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:37:24.804 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-6 - Starting...
+30-05-2023 | 18:37:24.814 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-6 - Start completed.
+30-05-2023 | 18:37:24.815 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:37:24.932 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:37:24.933 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:37:25.128 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:37:25.492 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:37:25.504 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:37:25.511 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 1.01 seconds (JVM running for 1645.382)
+30-05-2023 | 18:37:25.514 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:38:24.560 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+30-05-2023 | 18:38:24.560 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+30-05-2023 | 18:38:24.562 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 1 ms
+30-05-2023 | 18:38:24.564 | INFO  | 63 | getAll | c.s.v.c.UserSchemeMappingController | Entered into the GetAll method in Controller
+30-05-2023 | 18:38:24.564 | INFO  | 64 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:38:24.564 | DEBUG | 65 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Fetching all the User-Scheme Mapping details
+30-05-2023 | 18:38:24.580 | DEBUG | 78 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.UserSchemeMapping@516ab034, com.spring.veacy.entity.UserSchemeMapping@6610987, com.spring.veacy.entity.UserSchemeMapping@14fc5308]
+30-05-2023 | 18:38:38.147 | INFO  | 63 | getAll | c.s.v.c.UserSchemeMappingController | Entered into the GetAll method in Controller
+30-05-2023 | 18:38:38.148 | INFO  | 64 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:38:38.148 | DEBUG | 65 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | Fetching all the User-Scheme Mapping details
+30-05-2023 | 18:38:38.173 | DEBUG | 78 | getAll | c.s.v.s.UserSchemeMappingServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.UserSchemeMapping@2e8e160f, com.spring.veacy.entity.UserSchemeMapping@684f3a1a]
+30-05-2023 | 18:39:24.318 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:39:24.323 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:39:24.325 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+30-05-2023 | 18:39:24.336 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:39:24.338 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-6 - Shutdown initiated...
+30-05-2023 | 18:39:24.350 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-6 - Shutdown completed.
+30-05-2023 | 18:39:24.435 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:39:24.435 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:39:24.633 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:39:24.644 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 10 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:39:24.756 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:39:24.756 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:39:24.757 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:39:24.763 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:39:24.763 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 326 ms
+30-05-2023 | 18:39:24.794 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:39:24.798 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-7 - Starting...
+30-05-2023 | 18:39:24.809 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-7 - Start completed.
+30-05-2023 | 18:39:24.809 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:39:24.895 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:39:24.896 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:39:25.050 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:39:25.365 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:39:25.380 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:39:25.388 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 0.976 seconds (JVM running for 1765.258)
+30-05-2023 | 18:39:25.390 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:40:04.910 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+30-05-2023 | 18:40:04.914 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:40:04.926 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:40:04.927 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-7 - Shutdown initiated...
+30-05-2023 | 18:40:04.932 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-7 - Shutdown completed.
+30-05-2023 | 18:40:05.018 | INFO  | 55 | logStarting | c.s.v.SchemeApplication | Starting SchemeApplication using Java 17.0.6 on PI-IN-L38 with PID 28036 (/home/User-L38/Git Hub/VeaCy/Scheme/target/classes started by User-L38 in /home/User-L38/Git Hub/VeaCy/Scheme)
+30-05-2023 | 18:40:05.018 | INFO  | 631 | logStartupProfileInfo | c.s.v.SchemeApplication | No active profile set, falling back to 1 default profile: "default"
+30-05-2023 | 18:40:05.175 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+30-05-2023 | 18:40:05.183 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 7 ms. Found 3 JPA repository interfaces.
+30-05-2023 | 18:40:05.284 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8080 (http)
+30-05-2023 | 18:40:05.285 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+30-05-2023 | 18:40:05.285 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+30-05-2023 | 18:40:05.295 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+30-05-2023 | 18:40:05.296 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 276 ms
+30-05-2023 | 18:40:05.347 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+30-05-2023 | 18:40:05.351 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-8 - Starting...
+30-05-2023 | 18:40:05.364 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-8 - Start completed.
+30-05-2023 | 18:40:05.365 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+30-05-2023 | 18:40:05.458 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+30-05-2023 | 18:40:05.458 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:40:05.630 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+30-05-2023 | 18:40:05.920 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+30-05-2023 | 18:40:05.931 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8080 (http) with context path ''
+30-05-2023 | 18:40:05.938 | INFO  | 61 | logStarted | c.s.v.SchemeApplication | Started SchemeApplication in 0.944 seconds (JVM running for 1805.808)
+30-05-2023 | 18:40:05.940 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
+30-05-2023 | 18:40:42.945 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+30-05-2023 | 18:40:42.945 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+30-05-2023 | 18:40:42.946 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 1 ms
+30-05-2023 | 18:40:42.948 | INFO  | 54 | getAll | c.s.v.c.SchemeController | Entered into the GetAll method in Controller
+30-05-2023 | 18:40:42.949 | INFO  | 48 | getAll | c.s.v.s.SchemeServiceImpl | Entered into the GetAll method
+30-05-2023 | 18:40:42.949 | DEBUG | 49 | getAll | c.s.v.s.SchemeServiceImpl | Fetching all the scheme details
+30-05-2023 | 18:40:42.964 | DEBUG | 61 | getAll | c.s.v.s.SchemeServiceImpl | The displayed details are: 
+[com.spring.veacy.entity.Scheme@3245aa50, com.spring.veacy.entity.Scheme@65732000]
+30-05-2023 | 18:55:04.694 | INFO  | 159 | shutdown | o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin | Application shutdown requested.
+30-05-2023 | 18:55:04.699 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+30-05-2023 | 18:55:04.699 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+30-05-2023 | 18:55:04.705 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+30-05-2023 | 18:55:04.706 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-8 - Shutdown initiated...
+30-05-2023 | 18:55:04.715 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-8 - Shutdown completed.

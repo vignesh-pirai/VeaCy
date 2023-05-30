@@ -19,6 +19,10 @@ import org.hibernate.annotations.Where;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+* The User class is a Entity class that replicates the database table
+* related to User management in the application.
+*/
 @Entity
 @Getter
 @Setter

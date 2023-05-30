@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * The UserSchemeMappingController class is a REST controller that handles HTTP requests
- * related to user management in the application.
+ * related to user-scheme mapping management in the application.
  */
 
 @RestController

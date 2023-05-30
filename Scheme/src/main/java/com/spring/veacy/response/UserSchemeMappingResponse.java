@@ -16,6 +16,7 @@ import lombok.Setter;
 public class UserSchemeMappingResponse {
 
 	
+	private Long id;
 	private String userName;
 	
 	private String schemeName;

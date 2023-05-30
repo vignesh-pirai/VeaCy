@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * The SchemeController class is a REST controller that handles HTTP requests
- * related to user management in the application.
+ * related to scheme management in the application.
  */
 
 @RestController

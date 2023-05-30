@@ -22,6 +22,10 @@ import org.hibernate.annotations.Where;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+* The Scheme class is a Entity class that replicates the database table
+* related to Scheme management in the application.
+*/
 @Entity
 @Getter
 @Setter

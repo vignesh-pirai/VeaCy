@@ -82,8 +82,8 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 				UserSchemeMappingResponse response = new UserSchemeMappingResponse();
 				response.setUserName(userSchemeMapping.getUser().getName());
 				response.setSchemeName(userSchemeMapping.getScheme().getSchemeName());
-				response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
-//				BeanUtils.copyProperties(userSchemeMapping, response);
+//				response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
+				BeanUtils.copyProperties(userSchemeMapping, response);
 				list.add(response);
 			}
 			apiResponse.setMessage(message.getSuccess());
@@ -318,54 +318,52 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 				UserSchemeMapping userSchemeMapping = optional.get();
 				log.debug("Updating User-Scheme Mapping details");
 				updates.forEach(
-						(field,value)->{
-							switch(field)
-							{
-								case "userId": 
-									User user = new User();
-									user.setId(Long.valueOf((int) value));
-									if(urepo.findById(user.getId()).isPresent())
-									{
-										if(repo.findBySchemeAndUser(user.getId(), userSchemeMapping.getScheme().getId()).isEmpty()) {
-											userSchemeMapping.setUser(user);
-										}
-										else {
-											throw new EntityExistsException();
-										}
+					(field,value)->{
+						switch(field)
+						{
+							case "userId": 
+								User user = new User();
+								user.setId(Long.valueOf((int) value));									if(urepo.findById(user.getId()).isPresent())
+								{
+									if(repo.findBySchemeAndUser(user.getId(), userSchemeMapping.getScheme().getId()).isEmpty()) {
+										userSchemeMapping.setUser(user);
 									}
 									else {
-										apiResponse.setMessage(message.getUserNotFound());
-										throw new EntityNotFoundException();
+										throw new EntityExistsException();
 									}
-									break;
-								case "schemeId":
-									Scheme scheme = new Scheme();
-									scheme.setId(Long.valueOf((int) value));
-									if(srepo.findById(scheme.getId()).isPresent()) {
-										if(repo.findBySchemeAndUser(userSchemeMapping.getUser().getId(), scheme.getId()).isEmpty()) {
-											userSchemeMapping.setScheme(scheme);
-										}
-										else {
-											
-											throw new EntityExistsException();
-										}
+								}
+								else {
+									apiResponse.setMessage(message.getUserNotFound());
+									throw new EntityNotFoundException();
+								}
+								break;
+							case "schemeId":
+								Scheme scheme = new Scheme();
+								scheme.setId(Long.valueOf((int) value));
+								if(srepo.findById(scheme.getId()).isPresent()) {
+									if(repo.findBySchemeAndUser(userSchemeMapping.getUser().getId(), scheme.getId()).isEmpty()) {
+										userSchemeMapping.setScheme(scheme);
 									}
-									else {
-										apiResponse.setMessage(message.getSchemeNotFound());
-										throw new EntityNotFoundException();
+									else {				
+										throw new EntityExistsException();
 									}
-									
-									break;
-								case "commitmentAmount":
-									if (value instanceof Integer) {
-				                        userSchemeMapping.setCommitmentAmount(((Integer) value).doubleValue());
-				                    } else {
-				                        userSchemeMapping.setCommitmentAmount((Double) value);
-				                    }
-									break;
-								default: throw new IllegalArgumentException("Invalid field: "+field); 
-							}
+								}
+								else {
+									apiResponse.setMessage(message.getSchemeNotFound());
+									throw new EntityNotFoundException();
+								}
+							
+								break;
+							case "commitmentAmount":
+								if (value instanceof Integer) {
+			                        userSchemeMapping.setCommitmentAmount(((Integer) value).doubleValue());
+			                    } else {
+			                        userSchemeMapping.setCommitmentAmount((Double) value);
+			                    }
+								break;
+							default: throw new IllegalArgumentException("Invalid field: "+field); 
 						}
+					}
 				);
 				repo.save(userSchemeMapping);
 				log.debug("Updated User-Scheme Mapping details: {}",updates);
