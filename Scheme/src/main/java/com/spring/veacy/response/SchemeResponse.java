@@ -1,14 +1,17 @@
-package com.spring.veacy.model;
+package com.spring.veacy.response;
+
+import com.spring.veacy.entity.AuditingLogger;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SchemeModel {
+public class SchemeResponse {
 
+	
 	private String schemeName;
 	private String schemeDescription;
-	private Long auditingId;
+	
 	private Boolean isActive = true;
 }

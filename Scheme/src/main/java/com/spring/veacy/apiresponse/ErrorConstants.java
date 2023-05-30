@@ -1,4 +1,8 @@
-package com.spring.veacy.response;
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
+package com.spring.veacy.apiresponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -34,6 +38,12 @@ public class ErrorConstants {
 	
 	@Value("${SCHEME_NOT_FOUND}")
 	private String schemeNotFound;
+	
+	@Value("${USER_NOT_FOUND}")
+	private String userNotFound;
+	
+	@Value("${SCHEME_USER_NOT_FOUND}")
+	private String userSchemeNotFound;
 	
 	@Value("${SCHEME_NAME_NOT_FOUND}")
 	private String schemeNameNotFound;

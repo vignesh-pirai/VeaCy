@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.spring.veacy.controller;
 
 import java.util.List;
@@ -8,8 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.spring.veacy.apiresponse.UserSchemeMappingApiResponse;
 import com.spring.veacy.entity.UserSchemeMapping;
-import com.spring.veacy.model.UserSchemeMappingModel;
+import com.spring.veacy.request.UserSchemeMappingRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,19 +30,19 @@ public interface UserSchemeMappingControllerConfig {
 			   description = "Display all the User-Scheme Mapping Details")
 	@ApiResponse(responseCode = "200", content = {
              @Content(schema = @Schema(), mediaType = "application/json") })
-	public List<UserSchemeMapping> getAll();
+	public ResponseEntity<UserSchemeMappingApiResponse> getAll();
 	
 	@Operation(summary = "Show particular User-Scheme Mapping Details", 
 			   description = "Display User-Scheme Mapping Details by its Id")
 	@ApiResponse(responseCode = "200", content = {
           @Content(schema = @Schema(), mediaType = "application/json") })
-	public Optional<UserSchemeMapping> getById(@PathVariable Long id);
+	public ResponseEntity<UserSchemeMappingApiResponse> getById(@PathVariable Long id);
 	
 	@Operation(summary = "Save User-Scheme Mapping Details", 
 			   description = "Create and store the User-Scheme Mapping Details")
 	@ApiResponse(responseCode = "200", content = {
           @Content(schema = @Schema(), mediaType = "application/json") })
-	public String save(@RequestBody UserSchemeMappingModel userSchemeMappingModel);
+	public String save(@RequestBody UserSchemeMappingRequest userSchemeMappingModel);
 	
 //	@Operation(summary = "Update User-Scheme Mapping Details", 
 //			   description = "Update the User-Scheme Mapping Details by its Name")

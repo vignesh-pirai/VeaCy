@@ -1,5 +1,10 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.spring.veacy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,14 +15,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.spring.veacy.apiresponse.ApiResponseMessage;
+import com.spring.veacy.apiresponse.ErrorConstants;
+import com.spring.veacy.apiresponse.SchemeApiResponse;
 import com.spring.veacy.entity.AuditingLogger;
 import com.spring.veacy.entity.Scheme;
-import com.spring.veacy.model.SchemeModel;
 import com.spring.veacy.repos.SchemeRepo;
-import com.spring.veacy.response.ApiResponseMessage;
-import com.spring.veacy.response.ErrorConstants;
+import com.spring.veacy.request.SchemeRequest;
+import com.spring.veacy.response.SchemeResponse;
 
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The SchemeServiceImpl class provides an implementation of the SchemeService interface,
+ * handling CRUD operations and other actions on Scheme entities.
+ */
 @Service
 @Slf4j
 public class SchemeServiceImpl implements SchemeService {
@@ -28,182 +40,256 @@ public class SchemeServiceImpl implements SchemeService {
 	@Autowired
 	ErrorConstants message;
 	
-	private SchemeModel mapPersistenceModelToRestModel(Scheme scheme){
-		SchemeModel schemeModel = new SchemeModel();
-		schemeModel.setSchemeName(scheme.getSchemeName());
-		schemeModel.setSchemeDescription(scheme.getSchemeDescription());
-        return schemeModel;
-    }
-	
-	private void mapRestModelToPersistenceModel(SchemeModel schemeModel, Scheme scheme){
-		scheme.setSchemeName(schemeModel.getSchemeName());
-		scheme.setSchemeDescription(schemeModel.getSchemeDescription());
-	}
-	
+	/**
+     * {@inheritDoc}
+     */
 	@Override
-	public List<Scheme> getAll() {
+	public ResponseEntity<SchemeApiResponse> getAll() {
 		log.info("Entered into the GetAll method");
 		log.debug("Fetching all the scheme details");
-		return repo.findAll();
-	}
-
-	
-	@Override
-	public ResponseEntity<Scheme> getBySchemeName(String schemeName) {
-		log.info("Entered into the GetByName method");
-
-			log.debug("Fetching scheme with name: {}",schemeName);
-			Optional<Scheme> scheme = repo.findBySchemeNameAndIsDeletedFalse(schemeName);
-			if(scheme.isEmpty()) {
-				return null;
+		SchemeApiResponse apiResponse = new SchemeApiResponse();
+		try {
+			List<Scheme> schemeList = repo.findAll();
+			if(schemeList.isEmpty()) {
+				log.warn("No Schemes are available");
+				apiResponse.setMessage("The Scheme table is empty");
+				apiResponse.setStatus(Boolean.FALSE);
+				apiResponse.setStatusCode(message.getCode200());
+				return new ResponseEntity<>(apiResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
-			return ResponseEntity.ok(repo.findBySchemeNameAndIsDeletedFalse(schemeName).get()) ;
-
+			else {
+				log.debug("The displayed details are: \n"+schemeList);
+			}
+			List<SchemeResponse> schemeModelList = new ArrayList<>();
+			for(Scheme scheme:schemeList) {
+				SchemeResponse response = new SchemeResponse();
+				BeanUtils.copyProperties(scheme, response);
+//				schemeModel.setId(scheme.getId());
+//				schemeModel.setSchemeName(scheme.getSchemeName());
+//				schemeModel.setSchemeDescription(scheme.getSchemeDescription());
+//				schemeModel.setAuditingLogger(scheme.getAuditingLogger());
+//				schemeModel.setIsActive(scheme.getIsActive());
+//				schemeModel.setIsDeleted(scheme.getIsDeleted());
+				schemeModelList.add(response);
+			}
+			apiResponse.setMessage(message.getSuccess());
+			apiResponse.setStatus(Boolean.TRUE);
+			apiResponse.setStatusCode(message.getCode200());
+			apiResponse.setSchemeModelList(schemeModelList);
+			return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+		}
+		catch(Exception e)
+		{
+			apiResponse.setMessage(message.getInternalServerError());
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
-	public ResponseEntity<ApiResponseMessage> save(SchemeModel schemeModel) {
+	public ResponseEntity<SchemeApiResponse> getBySchemeName(String schemeName) {
+		log.info("Entered into the GetByName method");
+		log.debug("Fetching scheme with name: {}",schemeName);
+			SchemeApiResponse apiResponse = new SchemeApiResponse();
+			try {
+				Optional<Scheme> optional = repo.findBySchemeNameAndIsDeletedFalse(schemeName);
+				Scheme scheme = optional.get();
+				if(optional.isEmpty()) {
+					log.warn("No Schemes are available");
+					apiResponse.setMessage("The Scheme table is empty");
+					apiResponse.setStatus(Boolean.FALSE);
+					apiResponse.setStatusCode(message.getCode200());
+					return new ResponseEntity<>(apiResponse,HttpStatus.NOT_ACCEPTABLE);
+				}
+				else {
+					log.debug("The displayed details are: \n"+scheme);
+				}
+				List<SchemeResponse> schemeModelList = new ArrayList<>();
+				SchemeResponse response = new SchemeResponse();
+				BeanUtils.copyProperties(scheme, response);
+				schemeModelList.add(response);
+				apiResponse.setMessage(message.getSuccess());
+				apiResponse.setStatus(Boolean.TRUE);
+				apiResponse.setStatusCode(message.getCode200());
+				apiResponse.setSchemeModelList(schemeModelList);
+				return new ResponseEntity<>(apiResponse,HttpStatus.OK);
+			}
+			catch(Exception e)
+			{
+				apiResponse.setMessage(message.getInternalServerError());
+				apiResponse.setStatus(Boolean.FALSE);
+				apiResponse.setStatusCode(message.getCode500());
+				return new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+	}
+
+	/**
+     * {@inheritDoc}
+     */
+	@Override
+	public ResponseEntity<ApiResponseMessage> save(SchemeRequest schemeRequest) {
 		log.info("Entered into the Create method");
-		ApiResponseMessage response = new ApiResponseMessage();
+		ApiResponseMessage apiResponse = new ApiResponseMessage();
 		try {
 			log.debug("Storing scheme details");
 			Scheme scheme = new Scheme();
 			AuditingLogger loggerId = new AuditingLogger();
-			if(repo.findBySchemeNameAndIsDeletedFalse(schemeModel.getSchemeName()).isEmpty()) {
+			if(repo.findBySchemeNameAndIsDeletedFalse(schemeRequest.getSchemeName()).isEmpty()) {
 //			scheme.setSchemeName(schemeModel.getSchemeName());
 //			scheme.setSchemeDescription(schemeModel.getSchemeDescription());
-			BeanUtils.copyProperties(schemeModel, scheme);
-//			BeanUtils.copyProperties(loggerId.getId(), scheme);
-			loggerId.setId(schemeModel.getAuditingId());
+			BeanUtils.copyProperties(schemeRequest, scheme);
+			loggerId.setId(schemeRequest.getAuditingId());
 			scheme.setAuditingLogger(loggerId);
 			repo.save(scheme);
-			response.setMessage(message.getSuccess());
-			response.setStatus(Boolean.TRUE);
-			response.setStatusCode(message.getCode200());
-			return new ResponseEntity<>(response, HttpStatus.OK);
+			apiResponse.setMessage(message.getSuccess());
+			apiResponse.setStatus(Boolean.TRUE);
+			apiResponse.setStatusCode(message.getCode200());
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 			}
 			else {
-				response.setMessage(message.getSchemeExists());
-				response.setStatus(Boolean.FALSE);
-				response.setStatusCode(message.getCode500());
-				return new ResponseEntity<>(response, HttpStatus.NOT_ACCEPTABLE);
+				apiResponse.setMessage(message.getSchemeExists());
+				apiResponse.setStatus(Boolean.FALSE);
+				apiResponse.setStatusCode(message.getCode500());
+				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
 			}
 		}
 		catch(Exception e) {
 			log.error("The Scheme is not created");
 			log.error("Error --> "+e.getMessage());
-			response.setMessage(message.getInternalServerError());
-			response.setStatus(Boolean.FALSE);
-			response.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			apiResponse.setMessage(message.getInternalServerError());
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public ResponseEntity<ApiResponseMessage> updated(Map<String, Object> updates, String name) {
 		log.info("Entered into the Update method");
-		ApiResponseMessage response = new ApiResponseMessage();
+		ApiResponseMessage apiResponse = new ApiResponseMessage();
 		try {
 		Optional<Scheme> optional = repo.findBySchemeNameAndIsDeletedFalse(name);
 		if(optional.isPresent())
 		{
 			Scheme scheme = optional.get();
-			SchemeModel schemeModel = mapPersistenceModelToRestModel(scheme);
 			log.debug("Updating scheme details");
 			updates.forEach(
 					(field,value)->{
 						switch(field) {
 							case "schemeName": 
-								schemeModel.setSchemeName((String) value);
+								if(repo.findBySchemeNameAndIsDeletedFalse((String) value).isEmpty()) {
+									scheme.setSchemeName((String) value);
+								}
+								else {
+									String str = "Scheme name already exists.";
+									apiResponse.setMessage(str);
+									throw new IllegalArgumentException(str);
+								}
 								break;
 							case "schemeDescription":
-								schemeModel.setSchemeDescription((String) value);
+								scheme.setSchemeDescription((String) value);
 								break;
 							case "isActive":
-								schemeModel.setIsActive((Boolean) value);
+								scheme.setIsActive((Boolean) value);
 								break;
 							default:
-								throw new IllegalArgumentException("Invalid field: "+field);
+								String str = "Invalid field: "+field;
+								apiResponse.setMessage(str);
+								throw new IllegalArgumentException(str);
 						}
 					}
 			);
-			mapRestModelToPersistenceModel(schemeModel, scheme);
 			repo.save(scheme);
 			log.debug("Updated scheme details: {}",updates);
-			response.setMessage(message.getSuccess());
-			response.setStatus(Boolean.TRUE);
-			response.setStatusCode(message.getCode200());
-			return new ResponseEntity<>(response, HttpStatus.OK);
+			apiResponse.setMessage(message.getSuccess());
+			apiResponse.setStatus(Boolean.TRUE);
+			apiResponse.setStatusCode(message.getCode200());
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		}
 		else {
 			log.warn("The Scheme is not updated");
-			response.setMessage(message.getSchemeNotFound());
-			response.setStatus(Boolean.FALSE);
-			response.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+			apiResponse.setMessage(message.getSchemeNotFound());
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
 		}
+		}
+		catch(IllegalArgumentException e)
+		{
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode200());
+			return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
 		}
 		catch(Exception e)
 		{
-			response.setMessage(message.getInternalServerError());
-			response.setStatus(Boolean.TRUE);
-			response.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			apiResponse.setMessage(message.getInternalServerError());
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public ResponseEntity<ApiResponseMessage> deleteById(Long id) {
 		log.info("Entered into the Delete by Id method");
-		ApiResponseMessage response = new ApiResponseMessage();
+		ApiResponseMessage apiResponse = new ApiResponseMessage();
 		try {
 			log.debug("Deleting scheme details by id: {}",id);
 			repo.deleteById(id);
 			log.debug("Deleted scheme details by id: {}",id);
-			response.setMessage(message.getSuccess());
-			response.setStatus(Boolean.TRUE);
-			response.setStatusCode(message.getCode200());
-//			return "Deleted Successfully";
-			return new ResponseEntity<>(response, HttpStatus.OK);
+			apiResponse.setMessage(message.getSuccess());
+			apiResponse.setStatus(Boolean.TRUE);
+			apiResponse.setStatusCode(message.getCode200());
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		}
 		catch (Exception e) {
 			log.error("The Scheme is not deleted by id: {}",id);
-			response.setMessage(message.getInternalServerError());
-			response.setStatus(Boolean.FALSE);
-			response.setStatusCode(message.getCode500());
-//			return "Error Message --> "+e.getMessage();
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			apiResponse.setMessage(message.getInternalServerError());
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	@Override
 	public ResponseEntity<ApiResponseMessage> deleteBySchemeName(String schemeName) {
 		log.info("Entered into the Delete by Name method");
-		ApiResponseMessage response = new ApiResponseMessage();
+		ApiResponseMessage apiResponse = new ApiResponseMessage();
 		try {
 			log.debug("Deleting scheme details by name: {}",schemeName);
 			Scheme scheme = repo.findBySchemeNameAndIsDeletedFalse(schemeName).get();
 			Long id = scheme.getId();
 			repo.deleteById(id);
 			log.debug("Deleted scheme details by name: {}",schemeName);
-			response.setMessage(message.getSuccess());
-			response.setStatus(Boolean.TRUE);
-			response.setStatusCode(message.getCode200());
-//			return "Deleted Successfully";
-			return new ResponseEntity<>(response, HttpStatus.OK);
+			apiResponse.setMessage(message.getSuccess());
+			apiResponse.setStatus(Boolean.TRUE);
+			apiResponse.setStatusCode(message.getCode200());
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 		}
 		catch (Exception e) {
 			log.error("The Scheme is not deleted by name: {}",schemeName);
-//			return "Error Message --> "+e.getMessage();
-			response.setMessage(message.getInternalServerError());
-			response.setStatus(Boolean.FALSE);
-			response.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			apiResponse.setMessage(message.getInternalServerError());
+			apiResponse.setStatus(Boolean.FALSE);
+			apiResponse.setStatusCode(message.getCode500());
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
+}
 //	@Override
 //	public String deleteAll() {
 //		log.info("Entered into the Delete All");
@@ -278,4 +364,3 @@ public class SchemeServiceImpl implements SchemeService {
 //	return "Error --> "+e.getMessage();
 //}
 
-}

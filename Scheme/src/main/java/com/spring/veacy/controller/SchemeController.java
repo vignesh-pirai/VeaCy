@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.spring.veacy.controller;
 
 import java.util.List;
@@ -18,12 +22,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.veacy.apiresponse.ApiResponseMessage;
+import com.spring.veacy.apiresponse.SchemeApiResponse;
 import com.spring.veacy.entity.Scheme;
-import com.spring.veacy.model.SchemeModel;
-import com.spring.veacy.response.ApiResponseMessage;
+import com.spring.veacy.request.SchemeRequest;
 import com.spring.veacy.service.SchemeService;
 
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The SchemeController class is a REST controller that handles HTTP requests
+ * related to user management in the application.
+ */
 
 @RestController
 @RequestMapping("/scheme")
@@ -34,20 +44,37 @@ public class SchemeController implements SchemeControllerConfig{
 	@Autowired
 	SchemeService service;
 	
+	/**
+     * Get all schemes.
+     *
+     * @return a ResponseEntity containing a list of all Scheme objects.
+     */
 	@GetMapping("/")
-	public List<Scheme> getAll(){
+	public ResponseEntity<SchemeApiResponse> getAll(){
 		log.info("Entered into the GetAll method in Controller");
 		return service.getAll();
 	}
 	
-	@GetMapping("/name/{name}")
-	public ResponseEntity<Scheme> getByName(@PathVariable String name){
+	 /**
+     * Get a scheme by Scheme Name.
+     *
+     * @param name the unique identifier of the scheme.
+     * @return a ResponseEntity containing the Scheme object if found, or not found status if not found.
+     */
+	@GetMapping("/{name}")
+	public ResponseEntity<SchemeApiResponse> getByName(@PathVariable String name){
 		log.info("Entered into Get By Name method in Controller");
 		return service.getBySchemeName(name);
 	}
 	
+	/**
+     * Create a new Scheme.
+     *
+     * @param Scheme object to be created.
+     * @return a ResponseEntity containing the created Scheme object.
+     */
 	@PostMapping("/")
-	public ResponseEntity<ApiResponseMessage> save( @RequestBody SchemeModel scheme) {
+	public ResponseEntity<ApiResponseMessage> save( @RequestBody SchemeRequest scheme) {
 		log.info("Entered into Save method in Controller");
 		return service.save(scheme);
 	}
@@ -58,6 +85,13 @@ public class SchemeController implements SchemeControllerConfig{
 //		return service.update(scheme, name);
 //	}
 	
+	/**
+     * Update a scheme's properties given its unique identifier.
+     *
+     * @param id the unique identifier of the scheme.
+     * @param updates a map containing the properties to be updated and their new values.
+     * @return the updated Scheme object.
+     */
 	@PatchMapping("/{name}")
 	public ResponseEntity<ApiResponseMessage> updated(@RequestBody Map<String, Object> updates,@PathVariable String name){
 		log.info("Entered into Update method in Controller");
@@ -71,12 +105,24 @@ public class SchemeController implements SchemeControllerConfig{
 //		return service.deleteAll();
 //	}
 	
+	/**
+     * Delete a scheme by its unique identifier.
+     *
+     * @param id the unique identifier of the scheme.
+     * @return a ResponseEntity with no content status.
+     */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponseMessage> deleteById(@PathVariable Long id) {
 		log.info("Entered into Delete method in Controller");
 		return service.deleteById(id);
 	}
 	
+	/**
+     * Delete a scheme by its unique scheme name.
+     *
+     * @param scheme_name the unique identifier of the scheme.
+     * @return a ResponseEntity with no content status.
+     */
 	@DeleteMapping("/name/{name}")
 	
 	public ResponseEntity<ApiResponseMessage> deleteByName(@PathVariable String name)
