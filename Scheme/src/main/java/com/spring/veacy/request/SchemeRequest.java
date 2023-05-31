@@ -4,13 +4,12 @@
  */
 package com.spring.veacy.request;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class SchemeRequest {
-
 	private String schemeName;
 	private String schemeDescription;
 	private Long auditingId;

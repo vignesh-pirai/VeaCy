@@ -27,6 +27,7 @@ import com.spring.veacy.entity.AuditingLogger;
 import com.spring.veacy.entity.Scheme;
 import com.spring.veacy.entity.User;
 import com.spring.veacy.entity.UserSchemeMapping;
+import com.spring.veacy.exception.InvalidArgumentException;
 import com.spring.veacy.repos.SchemeRepo;
 import com.spring.veacy.repos.UserRepo;
 import com.spring.veacy.repos.UserSchemeMappingRepo;
@@ -37,28 +38,29 @@ import com.spring.veacy.response.UserSchemeMappingResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * The UserSchemeMappingServiceImpl class provides an implementation of the UserSchemeMappingService interface,
- * handling CRUD operations and other actions on UserSchemeMapping entities.
+ * The UserSchemeMappingServiceImpl class provides an implementation of the
+ * UserSchemeMappingService interface, handling CRUD operations and other
+ * actions on UserSchemeMapping entities.
  */
 @Service
 @Slf4j
-public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
+public class UserSchemeMappingServiceImpl implements UserSchemeMappingService {
 
 	@Autowired
 	UserSchemeMappingRepo repo;
-	
+
 	@Autowired
 	SchemeRepo srepo;
-	
+
 	@Autowired
 	UserRepo urepo;
-	
+
 	@Autowired
 	ErrorConstants message;
-	
+
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<UserSchemeMappingApiResponse> getAll() {
 		log.info("Entered into the GetAll method");
@@ -66,19 +68,17 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 		UserSchemeMappingApiResponse apiResponse = new UserSchemeMappingApiResponse();
 		try {
 			List<UserSchemeMapping> userSchemeMappingList = repo.findAll();
-			if(userSchemeMappingList.isEmpty())
-			{
+			if (userSchemeMappingList.isEmpty()) {
 				log.warn("No User Scheme Mapping Details are available");
 				apiResponse.setMessage("The User-Scheme Mapping table is empty");
 				apiResponse.setStatus(Boolean.FALSE);
 				apiResponse.setStatusCode(message.getCode200());
-				return new ResponseEntity<>(apiResponse,HttpStatus.NOT_ACCEPTABLE);
-			}
-			else {
-				log.debug("The displayed details are: \n"+userSchemeMappingList);
+				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
+			} else {
+				log.debug("The displayed details are: \n" + userSchemeMappingList);
 			}
 			List<UserSchemeMappingResponse> list = new ArrayList<>();
-			for(UserSchemeMapping userSchemeMapping:userSchemeMappingList) {
+			for (UserSchemeMapping userSchemeMapping : userSchemeMappingList) {
 				UserSchemeMappingResponse response = new UserSchemeMappingResponse();
 				response.setUserName(userSchemeMapping.getUser().getName());
 				response.setSchemeName(userSchemeMapping.getScheme().getSchemeName());
@@ -90,309 +90,281 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 			apiResponse.setStatus(Boolean.TRUE);
 			apiResponse.setStatusCode(message.getCode200());
 			apiResponse.setUserSchemeMappingModelList(list);
-			return new ResponseEntity<>(apiResponse,HttpStatus.OK);
-		}
-		catch(Exception e)
-		{
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+		} catch (Exception e) {
 			apiResponse.setMessage(message.getInternalServerError());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<UserSchemeMappingApiResponse> getById(Long id) {
 		log.info("Entered into the GetById method");
-		log.debug("Fetching User-Scheme Mapping with id {}",id);
+		log.debug("Fetching User-Scheme Mapping with id {}", id);
 		UserSchemeMappingApiResponse apiResponse = new UserSchemeMappingApiResponse();
 		try {
 			Optional<UserSchemeMapping> optional = repo.findById(id);
 			UserSchemeMapping userSchemeMapping = optional.get();
-			if(optional.isEmpty())
-			{
+			if (optional.isEmpty()) {
 				log.warn("No User Scheme Mapping Details are available");
 				apiResponse.setMessage("The User-Scheme Mapping table is empty");
 				apiResponse.setStatus(Boolean.FALSE);
 				apiResponse.setStatusCode(message.getCode200());
-				return new ResponseEntity<>(apiResponse,HttpStatus.NOT_ACCEPTABLE);
-			}
-			else {
-				log.debug("The displayed details are: \n"+userSchemeMapping);
+				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
+			} else {
+				log.debug("The displayed details are: \n" + userSchemeMapping);
 			}
 			List<UserSchemeMappingResponse> list = new ArrayList<>();
 			UserSchemeMappingResponse response = new UserSchemeMappingResponse();
 			response.setUserName(userSchemeMapping.getUser().getName());
 			response.setSchemeName(userSchemeMapping.getScheme().getSchemeName());
-			response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
-//			BeanUtils.copyProperties(userSchemeMapping, response);
+//			response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
+			BeanUtils.copyProperties(userSchemeMapping, response);
 			list.add(response);
 			apiResponse.setMessage(message.getSuccess());
 			apiResponse.setStatus(Boolean.TRUE);
 			apiResponse.setStatusCode(message.getCode200());
 			apiResponse.setUserSchemeMappingModelList(list);
-			return new ResponseEntity<>(apiResponse,HttpStatus.OK);
-		}
-		catch(Exception e)
-		{
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+		} catch (Exception e) {
 			apiResponse.setMessage(message.getInternalServerError());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<UserSchemeMappingApiResponse> getBySchemeId(Long id) {
-		
+
 		UserSchemeMappingApiResponse apiResponse = new UserSchemeMappingApiResponse();
 		try {
 			List<UserSchemeMapping> userSchemeMappingList = repo.findByScheme(id);
-			if(userSchemeMappingList.isEmpty())
-			{
+			if (userSchemeMappingList.isEmpty()) {
 				log.warn("No User Scheme Mapping Details are available");
 				apiResponse.setMessage("The scheme id in User-Scheme Mapping table is not found");
 				apiResponse.setStatus(Boolean.FALSE);
 				apiResponse.setStatusCode(message.getCode200());
-				return new ResponseEntity<>(apiResponse,HttpStatus.NOT_ACCEPTABLE);
-			}
-			else {
-				log.debug("The displayed details are: \n"+userSchemeMappingList);
+				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
+			} else {
+				log.debug("The displayed details are: \n" + userSchemeMappingList);
 			}
 			List<UserSchemeMappingResponse> list = new ArrayList<>();
-			for(UserSchemeMapping userSchemeMapping:userSchemeMappingList) {
+			for (UserSchemeMapping userSchemeMapping : userSchemeMappingList) {
 				UserSchemeMappingResponse response = new UserSchemeMappingResponse();
 				response.setUserName(userSchemeMapping.getUser().getName());
 				response.setSchemeName(userSchemeMapping.getScheme().getSchemeName());
-				response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
-//				BeanUtils.copyProperties(userSchemeMapping, response);
+//				response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
+				BeanUtils.copyProperties(userSchemeMapping, response);
 				list.add(response);
 			}
 			apiResponse.setMessage(message.getSuccess());
 			apiResponse.setStatus(Boolean.TRUE);
 			apiResponse.setStatusCode(message.getCode200());
 			apiResponse.setUserSchemeMappingModelList(list);
-			return new ResponseEntity<>(apiResponse,HttpStatus.OK);
-		}
-		catch(Exception e)
-		{
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+		} catch (Exception e) {
 			apiResponse.setMessage(message.getInternalServerError());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<UserSchemeMappingApiResponse> getByUserId(Long id) {
 		UserSchemeMappingApiResponse apiResponse = new UserSchemeMappingApiResponse();
 		try {
 			List<UserSchemeMapping> userSchemeMappingList = repo.findByUser(id);
-			if(userSchemeMappingList.isEmpty())
-			{
+			if (userSchemeMappingList.isEmpty()) {
 				log.warn("No User Scheme Mapping Details are available");
 				apiResponse.setMessage("The user id in User-Scheme Mapping table is not found");
 				apiResponse.setStatus(Boolean.FALSE);
 				apiResponse.setStatusCode(message.getCode200());
-				return new ResponseEntity<>(apiResponse,HttpStatus.NOT_ACCEPTABLE);
-			}
-			else {
-				log.debug("The displayed details are: \n"+userSchemeMappingList);
+				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
+			} else {
+				log.debug("The displayed details are: \n" + userSchemeMappingList);
 			}
 			List<UserSchemeMappingResponse> list = new ArrayList<>();
-			for(UserSchemeMapping userSchemeMapping:userSchemeMappingList) {
+			for (UserSchemeMapping userSchemeMapping : userSchemeMappingList) {
 				UserSchemeMappingResponse response = new UserSchemeMappingResponse();
 				response.setUserName(userSchemeMapping.getUser().getName());
 				response.setSchemeName(userSchemeMapping.getScheme().getSchemeName());
-				response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
-//				BeanUtils.copyProperties(userSchemeMapping, response);
+//				response.setCommitmentAmount(userSchemeMapping.getCommitmentAmount());
+				BeanUtils.copyProperties(userSchemeMapping, response);
 				list.add(response);
 			}
 			apiResponse.setMessage(message.getSuccess());
 			apiResponse.setStatus(Boolean.TRUE);
 			apiResponse.setStatusCode(message.getCode200());
 			apiResponse.setUserSchemeMappingModelList(list);
-			return new ResponseEntity<>(apiResponse,HttpStatus.OK);
-		}
-		catch(Exception e)
-		{
+			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+		} catch (Exception e) {
 			apiResponse.setMessage(message.getInternalServerError());
-			apiResponse.setStatus(Boolean.FALSE);
-			apiResponse.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(apiResponse,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	/**
-     * {@inheritDoc}
-     */
-	@Override
-	public ResponseEntity<ApiResponseMessage> save(UserSchemeMappingRequest request) {
-		log.info("Entered into the Create method");
-		ApiResponseMessage apiResponse = new ApiResponseMessage();
-		try {
-			log.debug("Storing User-Scheme Mapping details");
-//			String schemeName = srepo.findById(request.getSchemeId()).get().getSchemeName();
-//			if(srepo.findBySchemeNameAndIsDeletedFalse(schemeName).isPresent()) {
-			if(srepo.findById(request.getSchemeId()).isEmpty() && urepo.findById(request.getUserId()).isEmpty()) {
-				apiResponse.setMessage(message.getUserSchemeNotFound());
-				apiResponse.setStatus(Boolean.FALSE);
-				apiResponse.setStatusCode(message.getCode500());
-				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
-			}
-			else if(urepo.findById(request.getUserId()).isEmpty())
-			{
-				apiResponse.setMessage(message.getUserNotFound());
-				apiResponse.setStatus(Boolean.FALSE);
-				apiResponse.setStatusCode(message.getCode500());
-				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
-			}
-			else if(srepo.findById(request.getSchemeId()).isEmpty())
-			{
-				apiResponse.setMessage(message.getSchemeNotFound());
-				apiResponse.setStatus(Boolean.FALSE);
-				apiResponse.setStatusCode(message.getCode500());
-				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
-			}
-			Optional<UserSchemeMapping> list = repo.findBySchemeAndUser(request.getUserId(), request.getSchemeId());
-			if(list.isEmpty())
-			{
-				UserSchemeMapping mapping = new UserSchemeMapping();
-				User user = new User();
-				user.setId(request.getUserId());
-				Scheme scheme = new Scheme();
-				scheme.setId(request.getSchemeId());
-				AuditingLogger logger = new AuditingLogger();
-				logger.setId(request.getAuditingId());
-				mapping.setUser(user);
-				mapping.setScheme(scheme);
-				mapping.setCommitmentAmount(request.getCommitmentAmount());
-				mapping.setAuditingId(logger);
-				repo.save(mapping);
-				log.debug("Stored User-Scheme Mapping details");
-				apiResponse.setMessage(message.getSuccess());
-				apiResponse.setStatus(Boolean.TRUE);
-				apiResponse.setStatusCode(message.getCode200());
-				return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-			}
-			else
-			{
-				apiResponse.setMessage(message.getSchemeExists());
-				apiResponse.setStatus(Boolean.FALSE);
-				apiResponse.setStatusCode(message.getCode500());
-				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
-			}
-		}
-		catch(Exception e)
-		{
-			log.warn("The User-Scheme Mapping is not created");
-			apiResponse.setMessage(message.getSchemeExists());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
 			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		
 	}
 
 	/**
-     * {@inheritDoc}
-     */
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<ApiResponseMessage> save(UserSchemeMappingRequest request) {
+		log.info("Entered into the Create method");
+		ApiResponseMessage apiResponse = new ApiResponseMessage();
+		if (!(request.getUserId().toString().isBlank() || request.getSchemeId().toString().isBlank()
+				|| request.getCommitmentAmount().toString().isBlank()
+				|| request.getAuditingId().toString().isBlank())) {
+			try {
+				log.debug("Storing User-Scheme Mapping details");
+//			String schemeName = srepo.findById(request.getSchemeId()).get().getSchemeName();
+//			if(srepo.findBySchemeNameAndIsDeletedFalse(schemeName).isPresent()) {
+				if (srepo.findById(request.getSchemeId()).isEmpty() && urepo.findById(request.getUserId()).isEmpty()) {
+					apiResponse.setMessage(message.getUserSchemeNotFound());
+					apiResponse.setStatus(Boolean.FALSE);
+					apiResponse.setStatusCode(message.getCode500());
+					return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+				} else if (urepo.findById(request.getUserId()).isEmpty()) {
+					apiResponse.setMessage(message.getUserNotFound());
+					apiResponse.setStatus(Boolean.FALSE);
+					apiResponse.setStatusCode(message.getCode500());
+					return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+				} else if (srepo.findById(request.getSchemeId()).isEmpty()) {
+					apiResponse.setMessage(message.getSchemeNotFound());
+					apiResponse.setStatus(Boolean.FALSE);
+					apiResponse.setStatusCode(message.getCode500());
+					return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+				}
+				Optional<UserSchemeMapping> list = repo.findBySchemeAndUser(request.getUserId(), request.getSchemeId());
+				if (list.isEmpty()) {
+					UserSchemeMapping mapping = new UserSchemeMapping();
+					User user = new User();
+					user.setId(request.getUserId());
+					Scheme scheme = new Scheme();
+					scheme.setId(request.getSchemeId());
+					AuditingLogger logger = new AuditingLogger();
+					logger.setId(request.getAuditingId());
+					mapping.setUser(user);
+					mapping.setScheme(scheme);
+					mapping.setCommitmentAmount(request.getCommitmentAmount());
+					mapping.setAuditingId(logger);
+					repo.save(mapping);
+					log.debug("Stored User-Scheme Mapping details");
+					apiResponse.setMessage(message.getSuccess());
+					apiResponse.setStatus(Boolean.TRUE);
+					apiResponse.setStatusCode(message.getCode200());
+					return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+				} else {
+					apiResponse.setMessage(message.getSchemeExists());
+					apiResponse.setStatus(Boolean.FALSE);
+					apiResponse.setStatusCode(message.getCode500());
+					return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
+				}
+			} catch (Exception e) {
+				log.warn("The User-Scheme Mapping is not created");
+				apiResponse.setMessage(message.getInternalServerError());
+				apiResponse.setStatus(Boolean.FALSE);
+				apiResponse.setStatusCode(message.getCode500());
+				return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			throw new InvalidArgumentException("Invalid input");
+		}
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<ApiResponseMessage> updated(Map<String, Object> updates, Long id) {
 		log.info("Entered into the Update method");
 		ApiResponseMessage apiResponse = new ApiResponseMessage();
 		Optional<UserSchemeMapping> optional = repo.findById(id);
-		try{
-			if(optional.isPresent())
-			{
+		try {
+			if (optional.isPresent()) {
 				UserSchemeMapping userSchemeMapping = optional.get();
 				log.debug("Updating User-Scheme Mapping details");
-				updates.forEach(
-					(field,value)->{
-						switch(field)
-						{
-							case "userId": 
-								User user = new User();
-								user.setId(Long.valueOf((int) value));									if(urepo.findById(user.getId()).isPresent())
-								{
-									if(repo.findBySchemeAndUser(user.getId(), userSchemeMapping.getScheme().getId()).isEmpty()) {
-										userSchemeMapping.setUser(user);
-									}
-									else {
-										throw new EntityExistsException();
-									}
-								}
-								else {
-									apiResponse.setMessage(message.getUserNotFound());
-									throw new EntityNotFoundException();
-								}
-								break;
-							case "schemeId":
-								Scheme scheme = new Scheme();
-								scheme.setId(Long.valueOf((int) value));
-								if(srepo.findById(scheme.getId()).isPresent()) {
-									if(repo.findBySchemeAndUser(userSchemeMapping.getUser().getId(), scheme.getId()).isEmpty()) {
-										userSchemeMapping.setScheme(scheme);
-									}
-									else {				
-										throw new EntityExistsException();
-									}
-								}
-								else {
-									apiResponse.setMessage(message.getSchemeNotFound());
-									throw new EntityNotFoundException();
-								}
-							
-								break;
-							case "commitmentAmount":
-								if (value instanceof Integer) {
-			                        userSchemeMapping.setCommitmentAmount(((Integer) value).doubleValue());
-			                    } else {
-			                        userSchemeMapping.setCommitmentAmount((Double) value);
-			                    }
-								break;
-							default: throw new IllegalArgumentException("Invalid field: "+field); 
+				updates.forEach((field, value) -> {
+					switch (field) {
+					case "userId":
+						User user = new User();
+						user.setId(Long.valueOf((int) value));
+						if (urepo.findById(user.getId()).isPresent()) {
+							if (repo.findBySchemeAndUser(user.getId(), userSchemeMapping.getScheme().getId())
+									.isEmpty()) {
+								userSchemeMapping.setUser(user);
+							} else {
+								throw new EntityExistsException();
+							}
+						} else {
+							apiResponse.setMessage(message.getUserNotFound());
+							throw new EntityNotFoundException();
 						}
+						break;
+					case "schemeId":
+						Scheme scheme = new Scheme();
+						scheme.setId(Long.valueOf((int) value));
+						if (srepo.findById(scheme.getId()).isPresent()) {
+							if (repo.findBySchemeAndUser(userSchemeMapping.getUser().getId(), scheme.getId())
+									.isEmpty()) {
+								userSchemeMapping.setScheme(scheme);
+							} else {
+								throw new EntityExistsException();
+							}
+						} else {
+							apiResponse.setMessage(message.getSchemeNotFound());
+							throw new EntityNotFoundException();
+						}
+
+						break;
+					case "commitmentAmount":
+						if (value instanceof Integer) {
+							userSchemeMapping.setCommitmentAmount(((Integer) value).doubleValue());
+						} else {
+							userSchemeMapping.setCommitmentAmount((Double) value);
+						}
+						break;
+					default:
+						throw new IllegalArgumentException("Invalid field: " + field);
 					}
-				);
+				});
 				repo.save(userSchemeMapping);
-				log.debug("Updated User-Scheme Mapping details: {}",updates);
+				log.debug("Updated User-Scheme Mapping details: {}", updates);
 				apiResponse.setMessage(message.getSuccess());
 				apiResponse.setStatus(Boolean.TRUE);
 				apiResponse.setStatusCode(message.getCode200());
 				return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-			}
-			else
-			{
+			} else {
 				log.warn("The User-Scheme Mapping is not updated");
 				apiResponse.setMessage(message.getSchemeNotFound());
 				apiResponse.setStatus(Boolean.FALSE);
 				apiResponse.setStatusCode(message.getCode500());
 				return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
 			}
-		}
-		catch(EntityExistsException e) {
+		} catch (EntityExistsException e) {
 			apiResponse.setMessage(message.getUserSchemeExists());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
 			return new ResponseEntity<>(apiResponse, HttpStatus.NOT_ACCEPTABLE);
-		}
-		catch(EntityNotFoundException e) {
+		} catch (EntityNotFoundException e) {
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
-			return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);		
-		}
-		catch (Exception e) {
+			return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
 			apiResponse.setMessage(message.getInternalServerError());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
@@ -405,16 +377,15 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 		log.info("Entered into the Delete by Id method");
 		ApiResponseMessage apiResponse = new ApiResponseMessage();
 		try {
-			log.debug("Deleting User-Scheme Mapping details by id: {}",id);
+			log.debug("Deleting User-Scheme Mapping details by id: {}", id);
 			repo.deleteById(id);
-			log.debug("Deleted User-Scheme Mapping details by id: {}",id);
+			log.debug("Deleted User-Scheme Mapping details by id: {}", id);
 			apiResponse.setMessage(message.getSuccess());
 			apiResponse.setStatus(Boolean.TRUE);
 			apiResponse.setStatusCode(message.getCode200());
 			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
-		}
-		catch (Exception e) {
-			log.warn("The User-Scheme Mapping is not deleted by id: {}",id);
+		} catch (Exception e) {
+			log.warn("The User-Scheme Mapping is not deleted by id: {}", id);
 			apiResponse.setMessage(message.getSchemeExists());
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
@@ -461,4 +432,3 @@ public class UserSchemeMappingServiceImpl implements UserSchemeMappingService{
 //			return "The id= "+id+" is not found";
 //		}
 //	}
-

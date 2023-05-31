@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import com.spring.veacy.apiresponse.ErrorConstants;
 import com.spring.veacy.apiresponse.SchemeApiResponse;
 import com.spring.veacy.entity.AuditingLogger;
 import com.spring.veacy.entity.Scheme;
+import com.spring.veacy.exception.InvalidArgumentException;
 import com.spring.veacy.repos.SchemeRepo;
 import com.spring.veacy.request.SchemeRequest;
 import com.spring.veacy.response.SchemeResponse;
@@ -40,6 +42,7 @@ public class SchemeServiceImpl implements SchemeService {
 	@Autowired
 	ErrorConstants message;
 	
+	String invalid = "Input should not be null";
 	/**
      * {@inheritDoc}
      */
@@ -134,21 +137,21 @@ public class SchemeServiceImpl implements SchemeService {
 	public ResponseEntity<ApiResponseMessage> save(SchemeRequest schemeRequest) {
 		log.info("Entered into the Create method");
 		ApiResponseMessage apiResponse = new ApiResponseMessage();
+		if(!(schemeRequest.getSchemeName().isEmpty() || schemeRequest.getSchemeDescription().isEmpty() || schemeRequest.getAuditingId().toString().isEmpty())) {
 		try {
 			log.debug("Storing scheme details");
 			Scheme scheme = new Scheme();
 			AuditingLogger loggerId = new AuditingLogger();
 			if(repo.findBySchemeNameAndIsDeletedFalse(schemeRequest.getSchemeName()).isEmpty()) {
-//			scheme.setSchemeName(schemeModel.getSchemeName());
-//			scheme.setSchemeDescription(schemeModel.getSchemeDescription());
-			BeanUtils.copyProperties(schemeRequest, scheme);
-			loggerId.setId(schemeRequest.getAuditingId());
-			scheme.setAuditingLogger(loggerId);
-			repo.save(scheme);
-			apiResponse.setMessage(message.getSuccess());
-			apiResponse.setStatus(Boolean.TRUE);
-			apiResponse.setStatusCode(message.getCode200());
-			return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+
+				BeanUtils.copyProperties(schemeRequest, scheme);
+				loggerId.setId(schemeRequest.getAuditingId());
+				scheme.setAuditingLogger(loggerId);
+				repo.save(scheme);
+				apiResponse.setMessage(message.getSuccess());
+				apiResponse.setStatus(Boolean.TRUE);
+				apiResponse.setStatusCode(message.getCode200());
+				return new ResponseEntity<>(apiResponse, HttpStatus.OK);
 			}
 			else {
 				apiResponse.setMessage(message.getSchemeExists());
@@ -164,6 +167,14 @@ public class SchemeServiceImpl implements SchemeService {
 			apiResponse.setStatus(Boolean.FALSE);
 			apiResponse.setStatusCode(message.getCode500());
 			return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		}
+		else {
+//			apiResponse.setMessage("Bad Request");
+//			apiResponse.setStatus(Boolean.FALSE);
+//			apiResponse.setStatusCode(message.getCode500());
+//			return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+			throw new InvalidArgumentException(invalid);
 		}
 	}
 
@@ -202,7 +213,7 @@ public class SchemeServiceImpl implements SchemeService {
 							default:
 								String str = "Invalid field: "+field;
 								apiResponse.setMessage(str);
-								throw new IllegalArgumentException(str);
+								throw new InvalidArgumentException(str);
 						}
 					}
 			);

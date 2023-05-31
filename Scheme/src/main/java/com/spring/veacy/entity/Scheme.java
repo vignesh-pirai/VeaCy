@@ -39,8 +39,9 @@ public class Scheme {
 	private Long id;
 	
 //	@Column(unique = true)
-	@NotNull
+	@NotNull()
 	private String schemeName;
+	@NotNull
 	private String schemeDescription;
 	
 	@OneToOne
